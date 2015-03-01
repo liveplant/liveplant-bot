@@ -28,12 +28,18 @@
       
     switch (val) 
     {
-      case 0: //block water from moving
+      /*case 0: //block water from moving
           myservo.write(0);
           digitalWrite(led, LOW);
-      break;
+      break;*/
       case 1: //allow water to move
-          myservo.write(180); 
+          myservo.write(180);
+          delay(350);
+          myservo.write(94);
+          delay(10000);
+          myservo.write(0);
+          delay(355);
+          myservo.write(94);
           digitalWrite(led, HIGH);
       break;
       case 2:
@@ -42,6 +48,4 @@
     }
     Serial.println(val);
     val = 2;
-    delay(300);
-    myservo.write(94);
   }
