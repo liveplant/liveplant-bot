@@ -14,7 +14,7 @@ import time
 import RPi.GPIO as GPIO
 
 #TODO - save and retreive the next config param into a some kind of config file or a DB
-poll_url = 'http://localhost/liveplant/current_action.php'  #'http://liveplant.herokuapp.com/current_action'
+poll_url = 'http://liveplant.herokuapp.com/current_action'
 poll_time = 30
 ## DO_NOT_FORGET Whenever a new action added to Rasperry Pi and liveplant-server you have to add the entry to the next array!!!
 actions = {'water' : {'GPIO' : 4, 'TIME_ON' : 15, 'TIME_STAMP' : 0 }, \
