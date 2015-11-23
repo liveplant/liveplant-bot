@@ -1,17 +1,18 @@
 __author__ = 'vlad'
 #######################################################################
-#   poll_vote.py v.0.3
+#   poll_vote_noRPi.py v.0.3
 #
-#   This code designed to run on a Rasperry PI
-#   Please see https://github.com/liveplant/liveplant-bot/README.md for
-#   installation and wiring instructions
+#   This code does NOT NEED  a Rasperry PI to run
+#   The import RPi.GPIO and all related calls are commented out so developer can
+#   try/debug all logic of the poll_vote.py of the same version without need to
+#   have the Raspberry PI
 #
 #######################################################################
 
 import requests
 import json
 import time
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 #TODO - save and retreive the next config param into a some kind of config file or a DB
 poll_url = 'http://liveplant.herokuapp.com/current_action'
@@ -23,11 +24,11 @@ sleep_time = poll_time
 
 
 # Set GPIOs on the Rasperry Pi
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setwarnings(False)
 for action in actions :
     print('action:', action, ' GPIO:', actions[action]['GPIO'])
-    GPIO.setup(actions[action]['GPIO'], GPIO.OUT)
+#    GPIO.setup(actions[action]['GPIO'], GPIO.OUT)
 
 print('======> Start infinite loop to poll the liveplant server (get current_action JSON) from ',poll_url)
 # Poll the liveplant server for current action in an infinite loop
@@ -94,10 +95,10 @@ while (count > 0):
         old_timeStamp = current_timeStamp
 
         print("Switching",current_action,"ON for",actions[current_action]['TIME_ON'],'seconds')
-        GPIO.output(actions[current_action]['GPIO'],1)
+#        GPIO.output(actions[current_action]['GPIO'],1)
         time.sleep(actions[current_action]['TIME_ON'])
         print("Switching",current_action,"OFF")
-        GPIO.output(actions[current_action]['GPIO'],0)
+#        GPIO.output(actions[current_action]['GPIO'],0)
 
         # Check if any time left till next voting?
         if current_timeRemaning > actions[current_action]['TIME_ON'] :
@@ -110,4 +111,5 @@ while (count > 0):
         time.sleep(current_timeRemaning + 1)
 
 
-GPIO.cleanup()
+#GPIO.cleanup()
+
